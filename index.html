@@ -179,6 +179,7 @@
 
   /* ---- build cards ---- */
   .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .card-wide { grid-column: 1 / -1; }
   @media (max-width: 680px){ .cards { grid-template-columns: 1fr; } }
   .card {
     background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
@@ -374,7 +375,7 @@
 
 <section id="build">
   <div class="wrap">
-    <p class="sec-label">Beyond the day job · built AI-first</p>
+    <p class="sec-label">Beyond the day job</p>
     <div class="cards">
       <a class="card" href="https://m2certo.com.br" target="_blank" rel="noopener">
         <div class="card-top">
@@ -391,6 +392,13 @@
         </div>
         <p>Prototyped a WhatsApp conversational-commerce agent and cut per-conversation cost from <span class="hl">R$1.84 to R$0.84 in testing</span> through model and workflow design.</p>
         <span class="go">unit economics · LLM workflow</span>
+      </div>
+      <div class="card card-wide">
+        <div class="card-top">
+          <span class="card-name">Off the clock</span>
+          <span class="card-tag proto">Ironman '25</span>
+        </div>
+        <p>Completed my first full Ironman in 2025 — proof that the long, unglamorous game is where results compound. And the role I'm proudest of: husband and dad.</p>
       </div>
     </div>
   </div>
