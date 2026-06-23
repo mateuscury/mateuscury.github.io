@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /Mateus-Cury-ElevenLabs.pdf
+Disallow: /resume-print.html
