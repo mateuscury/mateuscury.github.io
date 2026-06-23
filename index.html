@@ -62,25 +62,52 @@
   @media (max-width: 720px){ .nav a:not(.pdf){ display:none; } }
 
   /* ---- hero ---- */
-  .hero { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
-  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
-  @media (max-width: 860px){ .hero-grid { grid-template-columns: 1fr; gap: 36px; } }
+  .hero { padding: 70px 0 56px; border-bottom: 1px solid var(--line); }
+  .hero-stage { max-width: 840px; }
+
+  /* the signature: this page, prompted into existence */
+  .prompt {
+    display: flex; align-items: flex-start; gap: 11px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 15px 18px; margin: 0 0 42px; max-width: 600px; min-height: 54px;
+    font-family: "JetBrains Mono", monospace; font-size: 14px; line-height: 1.5;
+  }
+  .prompt .pchar { color: var(--signal); font-weight: 700; user-select: none; }
+  .prompt .ptext { color: var(--ink); white-space: pre-wrap; }
+  .caret {
+    display: inline-block; width: 8px; height: 1.05em; translate: 0 3px;
+    background: var(--signal); margin-left: 1px;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .caret { animation: blink 1.05s steps(1) infinite; }
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
   .eyebrow {
     font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 2.5px;
     text-transform: uppercase; color: var(--signal); margin: 0 0 18px;
   }
   h1 {
     font-family: "Space Grotesk", sans-serif; font-weight: 700;
-    font-size: clamp(40px, 6vw, 68px); line-height: 1.02; letter-spacing: -1.5px;
-    margin: 0 0 18px;
+    font-size: clamp(44px, 7vw, 76px); line-height: 1.0; letter-spacing: -2px;
+    margin: 0 0 20px;
   }
   .roleline {
     font-family: "Space Grotesk", sans-serif; font-weight: 500;
-    font-size: clamp(15px, 2.2vw, 19px); color: var(--muted); margin: 0 0 22px;
+    font-size: clamp(16px, 2.4vw, 21px); color: var(--muted); margin: 0 0 18px; max-width: 28ch;
   }
   .roleline b { color: var(--ink); font-weight: 600; }
-  .thesis { font-size: 16.5px; color: #C3CCD8; max-width: 46ch; margin: 0 0 26px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .thesis { font-size: 16.5px; color: #C3CCD8; max-width: 52ch; margin: 0 0 22px; }
+  .thesis b { color: var(--ink); font-weight: 600; }
+
+  .statstrip {
+    font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--muted);
+    margin: 0 0 24px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 13px;
+  }
+  .statstrip b { color: var(--signal); font-weight: 700; }
+  .statstrip .sep { color: var(--faint); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
   .chip {
     font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--muted);
     border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px;
@@ -89,33 +116,27 @@
   .chip:hover { border-color: var(--signal-d); color: var(--ink); }
   .chip b { color: var(--signal); font-weight: 500; }
 
-  /* ---- signal panel (signature) ---- */
-  .panel {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-    padding: 22px 22px 18px;
+  .prompted-note {
+    font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--faint);
+    margin: 0; max-width: 58ch; line-height: 1.65;
   }
-  .panel-head {
-    display: flex; align-items: center; justify-content: space-between;
-    font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 1px;
-    text-transform: uppercase; color: var(--faint); margin-bottom: 18px;
-  }
-  .panel-head .live { display: flex; align-items: center; gap: 7px; color: var(--muted); }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 8px var(--signal); }
-  .meters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; align-items: end; height: 188px; }
-  .meter { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
-  .bar-track { width: 100%; flex: 1; display: flex; align-items: flex-end; }
-  .bar {
-    width: 100%; border-radius: 5px 5px 2px 2px;
-    background: linear-gradient(180deg, var(--signal) 0%, var(--signal-d) 100%);
-    height: var(--h);
-    box-shadow: 0 0 14px rgba(246,181,60,0.22);
-  }
-  .m-val { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 15px; color: var(--ink); margin: 9px 0 2px; }
-  .m-lab { font-size: 10.5px; color: var(--muted); text-align: center; line-height: 1.25; min-height: 26px; }
+  .prompted-note b { color: var(--muted); font-weight: 500; }
 
-  @media (prefers-reduced-motion: no-preference){
-    .bar { height: 0; transition: height 1.1s cubic-bezier(.16,1,.3,1); }
-    .meters.lit .bar { height: var(--h); }
+  /* the hero output renders in response to the prompt (JS adds .revealed) */
+  .js .hero-out > * { opacity: 0; transform: translateY(16px); }
+  .js .hero-out.revealed > * {
+    opacity: 1; transform: none;
+    transition: opacity .6s ease, transform .7s cubic-bezier(.16,1,.3,1);
+  }
+  .hero-out.revealed > *:nth-child(1){ transition-delay: .00s }
+  .hero-out.revealed > *:nth-child(2){ transition-delay: .07s }
+  .hero-out.revealed > *:nth-child(3){ transition-delay: .14s }
+  .hero-out.revealed > *:nth-child(4){ transition-delay: .21s }
+  .hero-out.revealed > *:nth-child(5){ transition-delay: .28s }
+  .hero-out.revealed > *:nth-child(6){ transition-delay: .35s }
+  .hero-out.revealed > *:nth-child(7){ transition-delay: .42s }
+  @media (prefers-reduced-motion: reduce){
+    .js .hero-out > * { opacity: 1; transform: none; transition: none; }
   }
 
   /* ---- sections ---- */
@@ -200,6 +221,7 @@
 
   :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 4px; }
 </style>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
@@ -216,33 +238,30 @@
 </div>
 
 <header class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div>
+  <div class="wrap hero-stage">
+    <div class="prompt" aria-hidden="true">
+      <span class="pchar">&gt;</span>
+      <span class="ptext" id="ptext"></span><span class="caret" id="caret"></span>
+    </div>
+
+    <div class="hero-out" id="heroOut">
       <p class="eyebrow">Revenue Operations · AI-First Operator</p>
       <h1>Mateus<br>Furtado Cury</h1>
-      <p class="roleline">I build the <b>automations, dashboards, and processes</b> that scale go-to-market — end to end, AI-first.</p>
-      <p class="thesis">7+ years in Revenue Operations &amp; GTM Strategy at <b>Meta</b> and <b>TikTok</b>. I take ambiguous problems from SQL to shipped tooling that sales, data, and product teams actually adopt.</p>
+      <p class="roleline">I build the <b>automations, dashboards &amp; processes</b> that scale go-to-market — end to end, AI-first.</p>
+      <p class="thesis">7+ years across <b>Meta</b> and <b>TikTok</b>, taking ambiguous problems from SQL to shipped tooling that sales, data, and product teams actually adopt.</p>
+      <p class="statstrip">
+        <span><b>145%</b> YoY growth</span><span class="sep">·</span>
+        <span><b>$160M+</b> portfolio</span><span class="sep">·</span>
+        <span><b>+50%</b> activation</span><span class="sep">·</span>
+        <span><b>10+</b> AI tools shipped</span>
+      </p>
       <div class="chips">
         <a class="chip" href="mailto:mateuscury@gmail.com">mateuscury@gmail.com</a>
         <a class="chip" href="https://linkedin.com/in/mateuscury">in/mateuscury</a>
         <span class="chip">São Paulo, BR <b>· remote</b></span>
         <span class="chip">PT · EN · ES</span>
       </div>
-    </div>
-
-    <div class="panel" aria-hidden="true">
-      <div class="panel-head">
-        <span>signal · career.levels</span>
-        <span class="live"><span class="dot"></span>live</span>
-      </div>
-      <div class="meters" id="meters">
-        <div class="meter"><div class="bar-track"><div class="bar" style="--h:88%"></div></div><div class="m-val">145%</div><div class="m-lab">YoY revenue growth</div></div>
-        <div class="meter"><div class="bar-track"><div class="bar" style="--h:100%"></div></div><div class="m-val">$160M+</div><div class="m-lab">portfolio managed</div></div>
-        <div class="meter"><div class="bar-track"><div class="bar" style="--h:62%"></div></div><div class="m-val">+50%</div><div class="m-lab">activation lift</div></div>
-        <div class="meter"><div class="bar-track"><div class="bar" style="--h:45%"></div></div><div class="m-val">30%</div><div class="m-lab">productivity gain</div></div>
-        <div class="meter"><div class="bar-track"><div class="bar" style="--h:70%"></div></div><div class="m-val">10+</div><div class="m-lab">AI tools shipped</div></div>
-        <div class="meter"><div class="bar-track"><div class="bar" style="--h:55%"></div></div><div class="m-val">7+ yr</div><div class="m-lab">RevOps &amp; GTM</div></div>
-      </div>
+      <p class="prompted-note">↳ <b>This page was prompted into existence.</b> Built end to end with AI — the same way I build everything.</p>
     </div>
   </div>
 </header>
@@ -334,6 +353,22 @@
       </div>
     </details>
 
+    <details class="channel">
+      <summary class="ch-head">
+        <span class="ch-idx">06</span>
+        <span><span class="ch-co">TechnipFMC / Halliburton</span><span class="ch-role">Offshore Construction Supervisor · earlier career</span></span>
+        <span class="ch-date">2012 — 2017</span>
+        <span class="ch-toggle">+</span>
+      </summary>
+      <div class="ch-body">
+        <ul>
+          <li>Led multidisciplinary offshore teams — vessel crew, ROV operators, and deck crews — to deliver complex subsea construction projects in <b>high-stakes, zero-margin-for-error</b> environments.</li>
+          <li>Translated dense project specifications into coordinated execution across crews, owning delivery under pressure as a contracted vendor to the operator.</li>
+          <li>Where the operator discipline comes from: engineering rigor, safety-critical decisions, and leading people through demanding conditions — the foundation I later carried into strategy and operations.</li>
+        </ul>
+      </div>
+    </details>
+
   </div>
 </section>
 
@@ -416,17 +451,36 @@
 </footer>
 
 <script>
-  // Light the signal meters once the panel is on screen (reduced-motion users get them lit instantly via CSS).
+  // The hero is "prompted into existence": a prompt types out, then the page renders in response.
+  // Reduced-motion users get the final state instantly; a failsafe guarantees content shows.
   (function(){
-    var meters = document.getElementById('meters');
-    if(!meters) return;
-    if(!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: no-preference)').matches){
-      meters.classList.add('lit'); return;
+    var ptext = document.getElementById('ptext');
+    var out   = document.getElementById('heroOut');
+    if(!out) return;
+    var msg = "build the page that shows why I'm the AI-first operator you want to hire";
+    var reveal = function(){ out.classList.add('revealed'); };
+    var reduce = !window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Failsafe: never leave the hero hidden, whatever happens.
+    setTimeout(reveal, 4000);
+
+    if(reduce || !ptext){
+      if(ptext) ptext.textContent = msg;
+      reveal();
+      return;
     }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ meters.classList.add('lit'); io.disconnect(); } });
-    }, { threshold: 0.4 });
-    io.observe(meters);
+
+    var i = 0;
+    (function type(){
+      if(i <= msg.length){
+        ptext.textContent = msg.slice(0, i);
+        var pause = (msg.charAt(i-1) === ' ') ? 38 : 24;
+        i++;
+        setTimeout(type, pause);
+      } else {
+        setTimeout(reveal, 360);
+      }
+    })();
   })();
 </script>
 
