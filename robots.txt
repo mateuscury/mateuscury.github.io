@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /Mateus-Furtado-Cury-Resume.pdf
+Disallow: /Mateus-Cury-CV.pdf
 Disallow: /resume-print.html
